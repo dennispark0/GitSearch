@@ -1,0 +1,27 @@
+{
+  "name": "gitsearch-middleware",
+  "version": "0.0.1",
+  "description": "A simple BFF for GitSearch",
+  "scripts": {
+    "start": "dotenv -e .env ts-node ./src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/cors": "^4.0.0",
+    "@koa/router": "^12.0.0",
+    "@octokit/core": "^4.2.0",
+    "koa": "^2.14.1",
+    "limiter": "^2.1.0",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@octokit/types": "^9.0.0",
+    "@types/koa": "^2.13.5",
+    "@types/koa__cors": "^3.3.0",
+    "@types/koa__router": "^12.0.0",
+    "dotenv": "^16.0.3",
+    "dotenv-cli": "^7.0.0"
+  }
+}

@@ -1,0 +1,23 @@
+:root {
+  --azure-x-11-web-color: #E5F8FAff;
+  --prussian-blue: #1E3142ff;
+  --light-steel-blue: #B0C7E0ff;
+  --charcoal: #39515Fff;
+  --blue-munsell: #608FA1ff;
+  --charcoal-2: #2E3B46ff;
+  --columbia-blue: #C3E2EEff;
+}
+
+html {
+  text-align: center;
+}
+
+.result-container {
+  background-color: rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  height: calc(70vh);
+  padding: 1rem;
+  overflow-y: scroll;
+  border-color:black;
+}

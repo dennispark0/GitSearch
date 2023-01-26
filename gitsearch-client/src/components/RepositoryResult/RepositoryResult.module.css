@@ -1,0 +1,27 @@
+.result-card {
+    border: 1px solid black;
+    border-radius: 4px;
+    margin-bottom:4px;
+    text-align: left;
+    display:flex;
+}
+
+.icon {
+    display: flex;
+    width:4rem;
+    height:4rem;
+    margin-right: 1rem;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+
+.title {
+    color:var(--blue-munsell);
+    font-size: 1.5rem;
+    
+}
+
+.title:visited {
+    color:var(--blue-munsell);
+}

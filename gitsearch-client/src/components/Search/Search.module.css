@@ -1,0 +1,15 @@
+.searchBar {
+    display: flex;
+    justify-content: center;
+    width:100%;
+    height:2rem;
+    margin: 1rem;
+}
+.searchText {
+ width:40%;
+ max-width:40%;
+}
+.searchButton {
+    width:20%;
+    max-width:20%;
+}
