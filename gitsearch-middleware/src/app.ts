@@ -8,7 +8,9 @@ import send from 'koa-send';
 
 const app = new koa();
 app.proxy = true;
+
 app.use(cors({ origin: process.env.WEB_URL, credentials: true}));
+
 app.use(async (ctx, next) => {
     if(ctx.path === '/health'){
         ctx.status = 200;
@@ -17,9 +19,10 @@ app.use(async (ctx, next) => {
     return await next();
 });
 app.use(router.routes());
-const root = path.join(__dirname, '/static');
+
+const root = path.join(__dirname, '/client');
 app.use(mount('/', serve(root)));
-app.use(async ctx => {
+app.use(async (ctx) => {
     await send(ctx, `/index.html`, {
         root
     });

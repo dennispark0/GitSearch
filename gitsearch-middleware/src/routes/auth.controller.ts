@@ -5,11 +5,11 @@ import { setResponse, StatusCodes } from "../util";
 
 const router = new Router({ prefix:'/auth'})
 
-router.get('/login', async (ctx, next)=> {
+router.get('/login', async (ctx)=> {
     const authorization = ctx.cookies.get('authorization');
     if(authorization) {
         setResponse(ctx, { data: true, status: StatusCodes.OK });
-        return await next();
+        return;
     }
     try {
         const { code } = ctx.query;
@@ -23,9 +23,7 @@ router.get('/login', async (ctx, next)=> {
     } catch (error) {
         console.error(error);
         setResponse(ctx, { data: false, status : StatusCodes.FORBIDDEN});
-    } finally {
-        return await next();
-    }
+    } 
 });
 
 router.get('/user', async (ctx, next)=> {
@@ -39,15 +37,12 @@ router.get('/user', async (ctx, next)=> {
         }
     } catch (error) {
         console.error(error);
-    } finally {
-        return await next();
-    }
+    } 
 });
 
 router.get('/logout', async (ctx, next) => {
     ctx.cookies.set('authorization', '', { httpOnly: true, secure:true });
     setResponse(ctx, { data: null, status : StatusCodes.OK });
-    return await next();
 });
 
 export default router;

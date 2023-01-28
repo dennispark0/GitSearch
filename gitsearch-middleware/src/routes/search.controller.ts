@@ -11,8 +11,6 @@ router.get('/repositories', async (ctx,next) => {
         setResponse(ctx, { data, status });
     } catch (error) {
         console.error(error);
-    } finally {
-        return await next();
     }
 });
 
