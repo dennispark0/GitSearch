@@ -3,7 +3,7 @@ import { UserData } from "../models/user-data.model";
 
 export class AuthService {
     private _axios = axios.create({
-        baseURL: 'https://git-librarian-server.onrender.com/auth',
+        baseURL: 'https://git-librarian-server.onrender.com/api/auth',
         withCredentials: true,
     });
 

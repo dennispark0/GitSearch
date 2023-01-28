@@ -6,7 +6,7 @@ class SearchService {
     //allow 10 req in 10 seconds
     private _rateLimiter = new RateLimiter({ tokensPerInterval: 3, interval: 10000 });
     private _axios = axios.create({
-        baseURL: 'https://git-librarian-server.onrender.com/search',
+        baseURL: 'https://git-librarian-server.onrender.com/api/search',
         withCredentials: true,
     });
 
