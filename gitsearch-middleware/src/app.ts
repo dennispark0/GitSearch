@@ -1,10 +1,11 @@
 import koa from 'koa';
+import mount from 'koa-mount';
+import serve from 'koa-static';
+import path from 'path';
 import cors from '@koa/cors';
-import authRouter from './routes/auth.controller';
-import searchRouter from './routes/search.controller'
+import router from './routes';
 
 const app = new koa();
-
 app.proxy = true;
 app.use(cors({ origin: process.env.WEB_URL, credentials: true}));
 app.use(async (ctx, next) => {
@@ -14,8 +15,8 @@ app.use(async (ctx, next) => {
     }
     return await next();
 });
-app.use(authRouter.routes());
-app.use(searchRouter.routes());
+app.use(router.routes());
+app.use(mount('/', serve(path.join(__dirname, '/static'))));
 app.listen(process.env.PORT);
 
 console.log(`app is now listening on port ${process.env.PORT}`);
