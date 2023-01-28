@@ -1,0 +1,10 @@
+.searchCategoriesContainer {
+    text-align: left;
+    display: flex;
+    flex-direction:column;
+}
+
+.searchCategoriesContainer h2 {
+    margin:0rem;
+    margin-bottom: 1rem;
+}

@@ -4,7 +4,8 @@ import authRouter from './routes/auth.controller';
 import searchRouter from './routes/search.controller'
 
 const app = new koa();
-app.use(cors());
+
+app.use(cors({ origin: process.env.CLIENT_URL, credentials: true}));
 app.use(authRouter.routes());
 app.use(searchRouter.routes());
 app.listen(process.env.PORT);

@@ -1,19 +1,17 @@
 import Router from '@koa/router';
-import { getOctokit } from '../clients/search-client';
+import { getRepositories } from '../clients/octo-client';
 import { SearchResponse } from '../models/response/search-response.model';
 import { setResponse } from '../util';
 
 const router = new Router({prefix: '/search'});
 
-router.get('', async (ctx,next) => {
+router.get('/repositories', async (ctx,next) => {
     try {
-        const { data, status } = await getOctokit<SearchResponse>(ctx);
+        const { data, status } = await getRepositories<SearchResponse>(ctx);
         setResponse(ctx, { data, status });
-    } catch (err : any) {
-        if(err.message) {
-            console.error(`Error! Status: ${err.response.status}. Message: ${err.response.data.message}`);
-        }
-        console.error(err);
+    } catch (error) {
+        console.error(error);
+    } finally {
         return await next();
     }
 });

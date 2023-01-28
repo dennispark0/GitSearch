@@ -17,16 +17,16 @@ export const categoryReducer = (state: Categories, action: Category) => {
     return newState;
 };
 
-export const extraFilters = {
-    repo: "",
-    user: "",
-    size: "",
-    followers: "",
-    forks: "",
-    stars: "",
-    created: "",
-    pushed: "",
-    language: "",
-    topic: "",
-    license: "",
-};
+export const extraFilters = [
+    "repo",
+    "user",
+    "size",
+    "followers",
+    "forks",
+    "stars",
+    "created",
+    "pushed",
+    "language",
+    "topic",
+    "license",
+];

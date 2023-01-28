@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Git Librarian",
+  "name": "A simple search UI for git repositories",
   "icons": [
     {
       "src": "favicon.ico",

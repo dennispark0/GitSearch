@@ -1,0 +1,20 @@
+.searchContainer {
+    justify-content: stretch;
+    align-items: stretch;
+    display: flex;
+    height: 100%;
+}
+
+.mainSearchMenu {
+    width:100%;
+}
+
+.resultContainer {
+    background-color: rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: calc(70vh);
+    padding: 1rem;
+    overflow-y: scroll;
+    border-color:black;
+  }

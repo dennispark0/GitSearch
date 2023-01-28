@@ -12,12 +12,3 @@ html {
   text-align: center;
 }
 
-.result-container {
-  background-color: rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  height: calc(70vh);
-  padding: 1rem;
-  overflow-y: scroll;
-  border-color:black;
-}

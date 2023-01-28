@@ -3,20 +3,21 @@ import axios from 'axios';
 import { SearchCodeRequest, SearchRepositoryRequest, SearchRequest } from '../models/search-request.model';
 
 class SearchService {
-    
-    private _rateLimiter = new RateLimiter({ tokensPerInterval: 10, interval: 'minute' });
+    //allow 10 req in 10 seconds
+    private _rateLimiter = new RateLimiter({ tokensPerInterval: 10, interval: 10000 });
     private _axios = axios.create({
         baseURL: 'http://localhost:8080/search',
+        withCredentials: true,
     });
 
     constructor() {
         /* Applies classic token bucket algorithm for limiting method calls to intercept
-        and throttle requests. However, this can obviously be bypassed -- we will need
-        middleware/a simple Backend-for-Frontend pattern to truly prevent our app from
-        bombarding the Git APIs.
+        and throttle requests. However, this can obviously be bypassed -- we would need to
+        additionally implement rate-limiting in our middleware w/ redis or something.
         */
         this._axios.interceptors.request.use(async (config) => {
-            if (this._rateLimiter.getTokensRemaining() <= 0) {
+            console.log(this._rateLimiter.getTokensRemaining());
+            if (this._rateLimiter.getTokensRemaining() <= 1) {
                 return Promise.reject('too many requests, please wait a bit');
             }
             await this._rateLimiter.removeTokens(1);
@@ -28,13 +29,6 @@ class SearchService {
         return Object.entries(params).map(([key,value]) => `${key}=${value}`).join('&');
     }
 
-    getHealth() {
-        return this._axios.get('/health');
-    }
-
-    getCode(params: SearchCodeRequest) {
-        return this._axios.get(`/code?${this.buildQueryString(params)}`)
-    }
     getRepositories(params: SearchRepositoryRequest) {
         return this._axios.get(`/repositories?${this.buildQueryString(params)}`)
     }
