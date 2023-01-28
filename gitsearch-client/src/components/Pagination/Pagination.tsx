@@ -22,7 +22,7 @@ export function Pagination({ doSearch, page, setPage, totalPages, isSearching }:
     const pages = [];
     const start = page > 5 ? page - 5 : 1;
     const end = totalPages - page > 5 ? Math.max(page + 5, 10) : totalPages;
-    for(let i = start; i <= end ;i ++) {
+    for(let i = start; i <= end ; i++) {
       pages[i] = 
       <button disabled={ isSearching } key={`page${i}`} onClick={(()=> updatePage(i))}>
          {page === i ? <b>{i}</b> : i}
