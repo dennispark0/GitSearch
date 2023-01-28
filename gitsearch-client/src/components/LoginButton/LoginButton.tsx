@@ -6,7 +6,7 @@ import classes from "./LoginButton.module.css";
 //TODO: move these to an env file.
 const authUrl = `https://github.com/login/oauth/authorize`;
 const clientId = `Iv1.9ea6762a29bbce2e`;
-const redirectUrl = `${process.env.WEB_URL}/login`;
+const redirectUrl = `https://git-librarian-server.onrender.com/login`;
 export default function LoginButton() {
   const [userInfo, setUserInfo] = useState<UserData | null>(null);
   const getUserInfo = async () => {
