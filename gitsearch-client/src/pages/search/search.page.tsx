@@ -54,7 +54,6 @@ export default function SearchPage() {
       const { data } = await searchService.getRepositories(_query);
       const { items, total_count } = data;
       setResults(items);
-      console.log(total_count, Math.floor(total_count / 30));
       setTotalPages(Math.floor(total_count / 30));
     } catch (err) {
       console.error(err);

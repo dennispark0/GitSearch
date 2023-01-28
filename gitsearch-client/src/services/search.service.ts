@@ -1,12 +1,12 @@
 import { RateLimiter } from 'limiter';
 import axios from 'axios';
-import { SearchCodeRequest, SearchRepositoryRequest, SearchRequest } from '../models/search-request.model';
+import { SearchRepositoryRequest, SearchRequest } from '../models/search-request.model';
 
 class SearchService {
     //allow 10 req in 10 seconds
-    private _rateLimiter = new RateLimiter({ tokensPerInterval: 10, interval: 10000 });
+    private _rateLimiter = new RateLimiter({ tokensPerInterval: 3, interval: 10000 });
     private _axios = axios.create({
-        baseURL: 'http://localhost:8080/search',
+        baseURL: 'https://git-librarian-server.onrender.com/search',
         withCredentials: true,
     });
 
@@ -16,7 +16,6 @@ class SearchService {
         additionally implement rate-limiting in our middleware w/ redis or something.
         */
         this._axios.interceptors.request.use(async (config) => {
-            console.log(this._rateLimiter.getTokensRemaining());
             if (this._rateLimiter.getTokensRemaining() <= 1) {
                 return Promise.reject('too many requests, please wait a bit');
             }

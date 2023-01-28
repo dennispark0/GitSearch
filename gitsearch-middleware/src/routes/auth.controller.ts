@@ -17,7 +17,7 @@ router.get('/login', async (ctx, next)=> {
             setResponse(ctx, { data: null, status: StatusCodes.BAD_REQUEST });
         } else {
             const { token } = await loginWithCode(code);
-            ctx.cookies.set('authorization', token, { httpOnly: true, secure: true });
+            ctx.cookies.set('authorization', token, { httpOnly: true });
             setResponse(ctx, { data :true, status: StatusCodes.OK });
         }
     } catch (error) {
@@ -45,7 +45,7 @@ router.get('/user', async (ctx, next)=> {
 });
 
 router.get('/logout', async (ctx, next) => {
-    ctx.cookies.set('authorization', '', { httpOnly: true, secure: true });
+    ctx.cookies.set('authorization', '', { httpOnly: true });
     setResponse(ctx, { data: null, status : StatusCodes.OK });
     return await next();
 });

@@ -8,7 +8,7 @@ export default function LoginPage() {
         try {
             const query = new URLSearchParams(window.location.search);
             const code = query.get("code");
-            const { data } = await authService.login(code);
+            await authService.login(code);
         } catch (error) {
             console.error(error);
         } finally {
