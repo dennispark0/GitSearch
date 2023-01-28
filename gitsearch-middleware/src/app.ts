@@ -5,7 +5,7 @@ import searchRouter from './routes/search.controller'
 
 const app = new koa();
 
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true}));
+app.use(cors({ origin: process.env.WEB_URL, credentials: true}));
 app.use(async (ctx, next) => {
     if(ctx.path === '/health'){
         ctx.status = 200;
