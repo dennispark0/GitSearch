@@ -3,9 +3,9 @@ import { getRepositories } from '../clients/octo-client';
 import { SearchResponse } from '../models/response/search-response.model';
 import { setResponse } from '../util';
 
-const router = new Router({prefix: '/search'});
+const router = new Router({ prefix: '/search' });
 
-router.get('/repositories', async (ctx,next) => {
+router.get('/repositories', async ctx => {
     try {
         const { data, status } = await getRepositories<SearchResponse>(ctx);
         setResponse(ctx, { data, status });

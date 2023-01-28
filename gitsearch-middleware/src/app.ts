@@ -11,12 +11,11 @@ app.proxy = true;
 
 app.use(cors({ origin: process.env.WEB_URL, credentials: true}));
 
-app.use(async (ctx, next) => {
+app.use(async (ctx) => {
     if(ctx.path === '/health'){
         ctx.status = 200;
         ctx.body = 'ok';
     }
-    return await next();
 });
 app.use(router.routes());
 

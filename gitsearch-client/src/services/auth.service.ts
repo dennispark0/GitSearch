@@ -3,7 +3,7 @@ import { UserData } from "../models/user-data.model";
 
 export class AuthService {
     private _axios = axios.create({
-        baseURL: 'http://localhost:3000/api/auth',
+        baseURL: '${process.env.WEB_URL}/api/auth',
         withCredentials: true,
     });
 

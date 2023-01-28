@@ -3,9 +3,9 @@ import { loginWithCode } from "../clients/auth-client";
 import { getUser } from "../clients/octo-client";
 import { setResponse, StatusCodes } from "../util";
 
-const router = new Router({ prefix:'/auth'})
+const router = new Router({ prefix:'/auth' })
 
-router.get('/login', async (ctx)=> {
+router.get('/login', async ctx => {
     const authorization = ctx.cookies.get('authorization');
     if(authorization) {
         setResponse(ctx, { data: true, status: StatusCodes.OK });
@@ -26,7 +26,7 @@ router.get('/login', async (ctx)=> {
     } 
 });
 
-router.get('/user', async (ctx, next)=> {
+router.get('/user', async ctx => {
     try {
         const response = await getUser(ctx);
         if(response) {
@@ -40,7 +40,7 @@ router.get('/user', async (ctx, next)=> {
     } 
 });
 
-router.get('/logout', async (ctx, next) => {
+router.get('/logout', async ctx => {
     ctx.cookies.set('authorization', '', { httpOnly: true, secure:true });
     setResponse(ctx, { data: null, status : StatusCodes.OK });
 });
