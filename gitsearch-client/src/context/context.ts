@@ -1,4 +1,5 @@
 import React from 'react';
+import { RepositoryResultProps } from '../components/RepositoryResult/RepositoryResult';
 import { initialCategories } from '../constants/search-constants';
 /**
  * I will be honest. I leveraged Context mainly to demonstrate that I know how to use it.
@@ -11,6 +12,8 @@ const initialState = {
     sortBy : '',
     orderBy : 'desc',
     categories : initialCategories,
+    results : [] as RepositoryResultProps[],
+    loggedIn : false,
 };
 
 const reducerTemplate = {
@@ -20,6 +23,8 @@ const reducerTemplate = {
     setOrderBy : new Function(),
     setSortBy : new Function(),
     dispatchCategory : new Function(),
+    setResults : new Function(),
+    setLoggedIn : new Function(),
 }
 
 export const AppContext = React.createContext(initialState);
