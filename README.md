@@ -18,4 +18,4 @@ CLIENT_SECRET=< Your Client Secret>
 WEB_DOMAIN=http://localhost:8080 (or whatever host you desire)
 
 ### 3.) Build
-From the root of the project, execute the commands "npm run build" and "npm start"
+From /gitsearch-middleware, execute the commands "npm run build" and "npm start"
