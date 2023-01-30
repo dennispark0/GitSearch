@@ -13,7 +13,7 @@ export default function FilterMenu({ filters, dispatchFilter, children }: PropsW
   const [isOpen, setIsOpen] = useState(true);
   return (
     <nav className={`${classes.filterMenuContainer} ${isOpen ? classes.open : ''}`}>
-      <button onClick={()=>setIsOpen(!isOpen)}><FontAwesomeIcon icon={faBars}/></button>
+      <button className={classes.hamburgerMenu} onClick={()=>setIsOpen(!isOpen)}><FontAwesomeIcon icon={faBars}/></button>
       {children}
       <hr />
       <h2>Additional Filters</h2>
