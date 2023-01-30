@@ -4,8 +4,8 @@ import { SearchRepositoryRequest } from '../models/search-request.model';
 import { buildQueryString } from '../utils/util';
 
 class SearchService {
-    //allow 3 req in 10 seconds
-    private _rateLimiter = new RateLimiter({ tokensPerInterval: 3, interval: 10000 });
+    //allow 5 req in 10 seconds
+    private _rateLimiter = new RateLimiter({ tokensPerInterval: 5, interval: 10000 });
     private _axios = axios.create({
         baseURL: '/api/search',
         withCredentials: true,
