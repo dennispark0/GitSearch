@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "A simple UI for searching github repositories",
   "scripts": {
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm run build:server && npm run build:client",
     "build:client": "cd ./gitsearch-client && npm install && npm run build",
-    "build:server" : "cd ../gitsearch-middleware npm install && tsc",
-    "start": "dotenv -e .env node build/app.js"
+    "build:server" : "cd ./gitsearch-middleware npm install && tsc",
+    "start": "dotenv -e .env node ./gitsearch-middleware/build/app.js"
   },
   "repository": {
     "type": "git",

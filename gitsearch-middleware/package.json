@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "A simple BFF for GitSearch",
   "scripts": {
-    "build": "npm install && tsc && npm run build:client",
-    "build:client": "cd ../gitsearch-client && npm install && npm run build",
-    "start": "dotenv -e .env node build/app.js"
+    "build": "npm install && tsc"
   },
   "author": "",
   "license": "MIT",
