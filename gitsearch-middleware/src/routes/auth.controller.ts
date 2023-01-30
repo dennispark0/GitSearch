@@ -1,6 +1,6 @@
 import Router from "@koa/router";
 import { loginWithCode } from "../clients/auth-client";
-import { getUser } from "../clients/octo-client";
+import { deleteToken, getUser } from "../clients/octo-client";
 import { setResponse, StatusCodes } from "../util";
 
 const router = new Router({ prefix:'/auth' })
@@ -17,7 +17,7 @@ router.get('/login', async ctx => {
             setResponse(ctx, { data: null, status: StatusCodes.BAD_REQUEST });
         } else {
             const { token } = await loginWithCode(code);
-            ctx.cookies.set('authorization', token, { httpOnly: true, secure:true });
+            ctx.cookies.set('authorization', token, { httpOnly: true, secure: true });
             setResponse(ctx, { data :true, status: StatusCodes.OK });
         }
     } catch (error) {
@@ -36,13 +36,21 @@ router.get('/user', async ctx => {
             setResponse(ctx, { data: null, status: StatusCodes.OK });
         }
     } catch (error) {
+        setResponse(ctx, { data: { error: "could not get user data."}, status: StatusCodes.BAD_GATEWAY });
         console.error(error);
     } 
 });
 
 router.get('/logout', async ctx => {
-    ctx.cookies.set('authorization', '', { httpOnly: true, secure:true });
-    setResponse(ctx, { data: null, status : StatusCodes.OK });
+    try {
+        await deleteToken(ctx);
+        setResponse(ctx, { data: null, status : StatusCodes.OK });
+    } catch (error) {
+        console.error(error);
+        setResponse(ctx, { data: { error: "could not log out."}, status : StatusCodes.BAD_GATEWAY });
+    } finally {
+        ctx.cookies.set('authorization', '', { httpOnly: true, secure: true });
+    }
 });
 
 export default router;

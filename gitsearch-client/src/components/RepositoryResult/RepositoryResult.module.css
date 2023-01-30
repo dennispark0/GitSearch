@@ -1,6 +1,7 @@
 .result-card {
-    background-color: white;
-    border: 1px solid black;
+    background-color: var(--comet-lightgold);
+    border: 2px solid var(--comet-bronze);
+    color:black;
     border-radius: 4px;
     margin-bottom:4px;
     text-align: left;
@@ -9,16 +10,17 @@
 
 .icon {
     display: flex;
+    background-color: rgba(0,0,0,0.1);
     width:4rem;
     height:4rem;
     margin-right: 1rem;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
+    border-right: 2px solid var(--comet-bronze);
+    border-bottom: 2px solid var(--comet-bronze);
 }
 
 
 .title {
-    color:var(--blue-munsell);
+    color:var(--comet-blue);
     font-size: 1.5rem;
     
 }

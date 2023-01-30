@@ -1,14 +1,20 @@
 :root {
-  --azure-x-11-web-color: #E5F8FAff;
-  --prussian-blue: #1E3142ff;
-  --light-steel-blue: #B0C7E0ff;
-  --charcoal: #39515Fff;
-  --blue-munsell: #608FA1ff;
-  --charcoal-2: #2E3B46ff;
-  --columbia-blue: #C3E2EEff;
+  background-color: var(--midnight-blue);
+  color:white;
+  --midnight-blue:#22233e;
+  --comet-blue:#4988c0;
+  --comet-lightgold:#e9d3bb;
+  --comet-bronze:#a88053;
+  font-family: 'Nunito-Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+}
+
+hr {
+  color:lightgray;
+  border-width: 0.5px;
 }
 
 html {
   text-align: center;
 }
-

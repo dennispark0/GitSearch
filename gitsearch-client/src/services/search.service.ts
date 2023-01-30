@@ -1,6 +1,7 @@
 import { RateLimiter } from 'limiter';
 import axios from 'axios';
-import { SearchRepositoryRequest, SearchRequest } from '../models/search-request.model';
+import { SearchRepositoryRequest } from '../models/search-request.model';
+import { buildQueryString } from '../utils/util';
 
 class SearchService {
     //allow 10 req in 10 seconds
@@ -11,7 +12,7 @@ class SearchService {
     });
 
     constructor() {
-        /* Applies classic token bucket algorithm for limiting method calls to intercept
+        /* Applies token bucket algorithm for limiting method calls to intercept
         and throttle requests. However, this can obviously be bypassed -- we would need to
         additionally implement rate-limiting in our middleware w/ redis or something.
         */
@@ -24,12 +25,8 @@ class SearchService {
         });
     }
 
-    private buildQueryString(params: SearchRequest): string {
-        return Object.entries(params).map(([key,value]) => `${key}=${value}`).join('&');
-    }
-
     getRepositories(params: SearchRepositoryRequest) {
-        return this._axios.get(`/repositories?${this.buildQueryString(params)}`)
+        return this._axios.get(`/repositories?${buildQueryString<SearchRepositoryRequest>(params)}`);
     }
 }
 

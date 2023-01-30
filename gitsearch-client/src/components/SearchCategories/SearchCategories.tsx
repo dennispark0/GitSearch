@@ -10,7 +10,7 @@ export interface SearchCategoriesProps {
 export default function SearchCategories({ categories, dispatchCategory }: SearchCategoriesProps) {
   return (
     <div className={classes.searchCategoriesContainer}>
-      <h2>Search in:</h2>
+      <h2>Search in</h2>
       <span>
         <input id="inAll" type="checkbox" onChange={() => dispatchCategory("all")} checked={categories.has("all")} />
         <label htmlFor="inAll">All</label>

@@ -9,7 +9,7 @@ import send from 'koa-send';
 const app = new koa();
 app.proxy = true;
 
-app.use(cors({ origin: process.env.WEB_URL, credentials: true}));
+app.use(cors({ origin: process.env.WEB_DOMAIN, credentials: true}));
 app.use(router.routes());
 
 const root = path.join(__dirname, '/client');

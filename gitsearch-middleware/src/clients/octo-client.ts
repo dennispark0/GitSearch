@@ -3,7 +3,10 @@ import { RequestParameters } from '@octokit/types';
 import { Context } from 'koa';
 
 const octoClient = new Octokit({});
-
+/**
+ * This solution is incomplete-- should be using a session id to store this in
+ * Redis or other suitable alternative...
+ */
 export const getRepositories = <T>(ctx: Context) => {
     const authCookie = ctx.cookies.get('authorization');
     const request: RequestParameters & { url : string } = {
@@ -33,6 +36,19 @@ export const getUser = (ctx : Context) => {
         }
     });
 }
+
+export const deleteToken = (ctx : Context) => {
+    const authCookie = ctx.cookies.get('authorization');
+    if(!authCookie) {
+        return Promise.resolve(null);
+    }
+    return octoClient.request({
+        method: 'DELETE',
+        url: '/applications/{client_id}/token',
+        client_id:process.env.CLIENT_ID,
+        access_token:authCookie,
+    });
+} 
 
 
 

@@ -7,6 +7,7 @@ export enum StatusCodes {
      UNAUTHORIZED = 401,
      FORBIDDEN = 403,
      UNREADABLE_RESPONSE = 422,
+     BAD_GATEWAY = 502,
      SERVICE_UNAVAILABLE = 503,
 }
 

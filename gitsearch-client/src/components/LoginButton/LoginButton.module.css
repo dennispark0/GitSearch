@@ -7,11 +7,19 @@
     background: none;
     border: none;
     font-size: 1rem;
+    color:white;
+    text-decoration:none;
+}
+
+.loginContainer:visited {
+    color:white;
+    text-decoration:none;
 }
 
 .loginContainer:hover {
     text-decoration: underline;
 }
+
 
 .userIcon {
     width: 2rem;

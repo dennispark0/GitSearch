@@ -1,5 +1,7 @@
 import { useEffect } from "react";
+import { faArrowDownWideShort, faArrowUpShortWide} from "@fortawesome/free-solid-svg-icons";
 import classes from "./Filter.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export interface FilterProps {
   sortBy: string;
   setSortBy: React.Dispatch<string>;
@@ -19,8 +21,7 @@ export default function Filter({ sortBy, setSortBy, orderBy, setOrderBy, doSearc
 
   return (
     <div className={classes.filterContainer}>
-      <span>Sort By:</span>
-      <select id="sort-dropdown" value={sortBy} disabled={isSearching} onChange={(e) => setSortBy(e.currentTarget.value)}>
+      <select id="sort-dropdown" className={classes.dropdown} value={sortBy} disabled={isSearching} onChange={(e) => setSortBy(e.currentTarget.value)}>
         <option value="">Best Match</option>
         {sortOptions.map((option, i) => (
           <option key={i} value={option}>
@@ -28,8 +29,8 @@ export default function Filter({ sortBy, setSortBy, orderBy, setOrderBy, doSearc
           </option>
         ))}
       </select>
-      <button disabled={isSearching} onClick={invertOrder}>
-        {orderBy === "asc" ? "↑" : "↓"}
+      <button disabled={isSearching} className={classes.filterButton} onClick={invertOrder}>
+        <FontAwesomeIcon icon={orderBy === "asc" ? faArrowUpShortWide : faArrowDownWideShort}/>
       </button>
     </div>
   );

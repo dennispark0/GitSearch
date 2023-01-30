@@ -1,0 +1,21 @@
+{
+  "name": "gitsearch",
+  "version": "1.0.0",
+  "description": "A simple UI for searching github repositories",
+  "scripts": {
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd ./gitsearch-client && npm install && npm run build",
+    "build:server" : "cd ../gitsearch-server npm install && tsc",
+    "start": "dotenv -e .env node build/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennispark0/GitSearch.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dennispark0/GitSearch/issues"
+  },
+  "homepage": "https://github.com/dennispark0/GitSearch#readme"
+}

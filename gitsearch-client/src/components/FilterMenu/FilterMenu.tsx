@@ -1,37 +1,25 @@
-import React, { PropsWithChildren, useEffect, useState, useReducer } from "react";
-import { extraFilters } from "../../constants/search-constants";
+import React, { PropsWithChildren, useState } from "react";
+import { ExtraFilterLabel, ExtraFilters, extraFilters } from "../../constants/search-constants";
 import classes from "./FilterMenu.module.css";
 
-
 export interface FilterMenuProps {
-  constraints : string[];
-  setConstraints : React.Dispatch<string[]>;
+  filters: ExtraFilters;
+  dispatchFilter: React.Dispatch<{ key: ExtraFilterLabel; value: string }>;
 }
-const updateArray = (input: string[], value: string, i: number, callback : React.Dispatch<string[]>) => {
-  const temp = [...input];
-  temp[i] = value;
-  callback(temp);
-};
-export default function FilterMenu({ constraints, setConstraints, children }: PropsWithChildren<FilterMenuProps>) {
-  const [filters, setFilters] = useState(extraFilters);
 
-  const addConstraintFromFilter = () => {
-
-  }
-
+export default function FilterMenu({ filters, dispatchFilter, children }: PropsWithChildren<FilterMenuProps>) {
   return (
     <nav className={classes.filterMenuContainer}>
       {children}
-      <h2>Filter By:</h2>
-      <select onChange={addConstraintFromFilter}>
-        <option>- Select -</option>
-        {filters.filter(f=>f).map((filter, i)=> <option key={`constraint-${filter}-${i}`} value={i}>{filter}</option>)}
-      </select>
-      {constraints.filter(c=>c).map((constraint, i)=><div key={`constraint-${constraint}-${i}`}>
-        <label>{constraint}</label>
-        {/* <input value={values[i]} onChange={(e)=>updateArray(values,e.currentTarget.value, i, setValues)}/> */}
-      </div>)}
+      <hr />
+      <h2>Additional Filters</h2>
+      {Object.keys(filters).map(filterName=>      
+        (<span className={classes.filterInput}>
+        <label htmlFor={`${filterName}-filter`}>{filterName}:</label>
+        <input id={filterName} value={filters[filterName]} 
+          onChange={(e)=> dispatchFilter({ key: filterName as ExtraFilterLabel, value : e.currentTarget.value})}/>
+      </span>))
+      }
     </nav>
   );
 }
-

@@ -1,0 +1,17 @@
+.paginationContainer {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.paginationContainer button {
+    background-color: white;
+    color: var(--comet-blue);
+    border: 1px solid transparent;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+}
+
+button.active {
+    background-color: var(--comet-blue);
+    color: white;
+}

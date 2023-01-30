@@ -3,13 +3,32 @@ import Filter from "../../components/Filter/Filter";
 import { SearchRepositoryRequest } from "../../models/search-request.model";
 import searchService from "../../services/search.service";
 import classes from "./search.module.css";
-import { categoryReducer, extraFilters, initialCategories } from "../../constants/search-constants";
+import { Categories, Category, ExtraFilterLabel, ExtraFilters, extraFilters, initialCategories } from "../../constants/search-constants";
 import LoginButton from "../../components/LoginButton/LoginButton";
 import FilterMenu from "../../components/FilterMenu/FilterMenu";
 import { Pagination } from "../../components/Pagination/Pagination";
 import { RepositoryResultProps, RepositoryResult } from "../../components/RepositoryResult/RepositoryResult";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SearchCategories from "../../components/SearchCategories/SearchCategories";
+import { buildQualifierString } from "../../utils/util";
+
+const categoryReducer = (state: Categories, action: Category) => {
+  if (action === "all") {
+    return state.has("all") ? new Set<Category>() : new Set(initialCategories);
+  }
+  const newState = new Set(state);
+  //if any flag is toggled, we no longer need the 'all' flag
+  newState.delete("all");
+  if (!newState.delete(action)) {
+    newState.add(action);
+  }
+  return newState;
+};
+
+const filterReducer = (state: ExtraFilters, action: { key: ExtraFilterLabel; value: string }) => {
+  state[action.key] = action.value;
+  return { ...state };
+};
 
 export default function SearchPage() {
   const [results, setResults] = useState<RepositoryResultProps[]>([]);
@@ -20,24 +39,11 @@ export default function SearchPage() {
   const [orderBy, setOrderBy] = useState("desc");
   const [isSearching, setIsSearching] = useState(false);
   const [categories, dispatchCategory] = useReducer(categoryReducer, initialCategories);
-  const [constraints, setConstraints] = useState<string[]>(new Array(extraFilters.length).fill(''));
-  //the "category" property of a query needs to be in a format of "in:a,b,c.."
-  const categoryQualifiers = () => {
-    //simply omit the qualifier to search all dimensions.
-    if (categories.has("all")) {
-      return "";
-    }
-    return Array.from(categories).reduce((str, category, i) => {
-      if (i <= 0) {
-        return `${str}${category}`;
-      }
-      return `${str},${category}`;
-    }, "in:");
-  };
+  const [filters, dispatchFilter] = useReducer(filterReducer, extraFilters);
 
-  const additionalFilterString = () => {
-    return '';
-  };
+  //the "category" property of a query needs to be in a format of "in:a,b,c.."
+  //simply omit the qualifier to search all dimensions.
+  const categoryQualifiers = () => (categories.has("all") ? "" : "in:" + Array.from(categories).join(","));
 
   const doSearch = async () => {
     if (isSearching || !query) {
@@ -45,7 +51,7 @@ export default function SearchPage() {
     }
     setIsSearching(true);
     const _query: SearchRepositoryRequest = {
-      q: `${query} ${categoryQualifiers()} ${additionalFilterString()}`,
+      q: encodeURIComponent(`${query} ${categoryQualifiers()} ${buildQualifierString(filters)}`),
       sort: sortBy,
       order: orderBy,
       page,
@@ -68,22 +74,32 @@ export default function SearchPage() {
     }
   };
 
+  const Results = () =>
+    results.length ? (
+      <>
+        {results.map((result, i) => (
+          <RepositoryResult key={i} {...result} />
+        ))}
+      </>
+    ) : (
+      <span>No Results</span>
+    );
+
   return (
     <main className={classes.searchContainer} onKeyDown={submitOnEnter}>
+      <FilterMenu filters={filters} dispatchFilter={dispatchFilter}>
+        <LoginButton />
+        <hr />
+        <SearchCategories categories={categories} dispatchCategory={dispatchCategory} />
+      </FilterMenu>
       <section className={classes.mainSearchMenu}>
         <SearchBar isSearching={isSearching} query={query} setQuery={setQuery} doSearch={doSearch} />
-        <Filter doSearch={doSearch} isSearching={isSearching} sortBy={sortBy} setSortBy={setSortBy} orderBy={orderBy} setOrderBy={setOrderBy} />
-        <div className={classes.resultContainer}>
-          {results.map((result, i) => (
-            <RepositoryResult key={i} {...result} />
-          ))}
+        <div>
+          <Filter doSearch={doSearch} isSearching={isSearching} sortBy={sortBy} setSortBy={setSortBy} orderBy={orderBy} setOrderBy={setOrderBy} />
+          {<div className={classes.resultContainer}>{!isSearching ? <Results /> : "Searching..."}</div>}
         </div>
         <Pagination page={page} setPage={setPage} totalPages={totalPages} isSearching={isSearching} doSearch={doSearch} />
       </section>
-      <FilterMenu constraints={constraints} setConstraints={setConstraints}>
-        <LoginButton />
-        <SearchCategories categories={categories} dispatchCategory={dispatchCategory} />
-      </FilterMenu>
     </main>
   );
 }
