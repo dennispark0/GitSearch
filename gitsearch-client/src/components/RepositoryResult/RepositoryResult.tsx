@@ -6,16 +6,18 @@ export interface RepositoryResultProps {
   description: string;
   html_url: string;
   pushed_at: string;
-  owner: { avatar_url: string, login: string, html_url : string };
+  forks_count: string;
+  stargazers_count: string;
+  owner: { avatar_url: string; login: string; html_url: string };
 }
 
-export function RepositoryResult({ full_name, description, html_url, pushed_at, owner }: RepositoryResultProps) {
+export function RepositoryResult({ full_name, description, html_url, pushed_at, owner, forks_count, stargazers_count }: RepositoryResultProps) {
   const formattedDate = new Date(pushed_at).toDateString();
 
   return (
     <section className={classes["result-card"]}>
       <a href={owner.html_url} className={classes.icon}>
-        <img src={owner.avatar_url}  alt={owner.login}/>
+        <img src={owner.avatar_url} alt={owner.login} />
       </a>
       <div>
         <a href={html_url} className={classes.title}>
@@ -23,6 +25,8 @@ export function RepositoryResult({ full_name, description, html_url, pushed_at, 
         </a>
         <p>{description}</p>
         <p>Last Updated: {formattedDate}</p>
+        <p>Forks: {forks_count}</p>
+        <p>Stars: {stargazers_count}</p>
       </div>
     </section>
   );

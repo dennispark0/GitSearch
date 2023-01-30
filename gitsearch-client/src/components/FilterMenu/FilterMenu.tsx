@@ -15,13 +15,12 @@ export default function FilterMenu({ filters, dispatchFilter, children }: PropsW
   return (
     <nav className={`${classes.filterMenuContainer} ${isOpen ? classes.open : ""}`}>
       <div className={classes.topMenu}>
+      {<LoginButton />}
         <button className={classes.hamburgerMenu} onClick={() => setIsOpen(!isOpen)}>
           <FontAwesomeIcon icon={faBars} />
         </button>
-        <LoginButton />
       </div>
-      {isOpen ? (
-        <>
+        <div className={classes.mainMenu}>
           <hr />
           {children}
           <hr />
@@ -36,8 +35,7 @@ export default function FilterMenu({ filters, dispatchFilter, children }: PropsW
               />
             </span>
           ))}
-        </>
-      ) : null}
+        </div>
     </nav>
   );
 }
