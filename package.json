@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npm run build:client && npm run build:server",
     "build:client": "cd ./gitsearch-client && npm install && npm run build",
-    "build:server" : "cd ../gitsearch-server npm install && tsc",
+    "build:server" : "cd ../gitsearch-middleware npm install && tsc",
     "start": "dotenv -e .env node build/app.js"
   },
   "repository": {
