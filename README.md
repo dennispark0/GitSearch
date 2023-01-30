@@ -9,7 +9,8 @@ To run this locally with authentication, you will need to do the following steps
 ### 1.) Build a Github App
 Follow the steps in the guide and specify a redirect url that points to your desired host at {host}/login. This is necessary to use authentication.
 
-### 2.) Setup .env file with the following arguments:
+### 2.) Setup .env
+Create an .env file in gitsearch-middleware:
 APP_ID=< Your App ID >
 PRIVATE_KEY=< Generated Private Key >
 CLIENT_ID=< Your Client ID>
