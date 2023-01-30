@@ -1,14 +1,12 @@
 .loginContainer {
-    display: flex;
     align-items: center;
-    margin-bottom: 1rem;
-    width:100%;
-    text-align: right;
     background: none;
     border: none;
+    color: #fff;
+    display: flex;
     font-size: 1rem;
-    color:white;
-    text-decoration:none;
+    text-align: right;
+    text-decoration: none;
 }
 
 .loginContainer:visited {

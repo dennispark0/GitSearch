@@ -2,14 +2,27 @@
     padding: 1rem;
     border-right: 1px solid white;
     min-width:20%;
-
+    height:100%;
     text-align: left;
-    position: absolute;
     z-index: 1;
     transition: all 1s ease-in-out;
     background: var(--midnight-blue);
+    transform: translateX(calc(-100% + 3rem));
+}
+/*the bootstrap "small" px width*/
+@media screen and (max-width:1024px) {
+    .filterMenuContainer {
+        position: absolute;
+        right: 1rem;
+        font-size: 1rem;
+        width:100%;
+        background: transparent;
+        border: none;
+        color: white;
+    }
 }
 .open {
+    transform: translateX(0px);
     overflow-y: scroll;
 }
 .filter {
@@ -27,7 +40,7 @@
 }
 
 .hamburgerMenu {
-    position: absolute;
+    position: fixed;
     top:2rem;
     right:2rem;
 }

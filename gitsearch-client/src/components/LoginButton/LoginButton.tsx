@@ -6,7 +6,7 @@ import classes from "./LoginButton.module.css";
 //TODO: move these to an env file.
 const authUrl = `https://github.com/login/oauth/authorize`;
 const clientId = `Iv1.9ea6762a29bbce2e`;
-const redirectUrl = `http://localhost:3000/login`;
+const redirectUrl = `https://git-search.onrender.com/login`;
 export default function LoginButton() {
   const [userInfo, setUserInfo] = useState<UserData | null>(null);
   const getUserInfo = async () => {
@@ -24,14 +24,12 @@ export default function LoginButton() {
   }, []);
 
   return (
-    <div >
-      {userInfo ? (
+      userInfo ? (
         <button onClick={logout} className={classes.loginContainer}>
           <img className={classes.userIcon} src={userInfo.avatar_url} /> <span>Logout</span>
         </button>
       ) : (
         <a className={classes.loginContainer} href={`${authUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}`}>Login</a>
-      )}
-    </div>
+      )
   );
 }

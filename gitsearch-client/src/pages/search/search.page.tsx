@@ -88,8 +88,6 @@ export default function SearchPage() {
   return (
     <main className={classes.searchContainer} onKeyDown={submitOnEnter}>
       <FilterMenu filters={filters} dispatchFilter={dispatchFilter}>
-        <LoginButton />
-        <hr />
         <SearchCategories categories={categories} dispatchCategory={dispatchCategory} />
       </FilterMenu>
       <section className={classes.mainSearchMenu}>
